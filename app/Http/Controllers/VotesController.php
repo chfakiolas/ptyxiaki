@@ -27,8 +27,7 @@ class VotesController extends Controller
         }
         $vote->vote = $request->input('vote');
         $vote->save();
-        return redirect('/')->with('success', 'Your Vote has been Submited!');
-    	// return redirect()->action('PollsController@results')->with('success', 'Your Vote has been Submited!');
+        return redirect('/polls/' . $vote->poll_id . '/results')->with('success', 'Your Vote has been Submited!');
     }
 
     // public function show($poll_id){
