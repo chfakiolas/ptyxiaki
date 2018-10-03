@@ -10431,3 +10431,8 @@ body {
   /* you might want to change this */
 }
 
+.chart {
+  height: 500px;
+  width: 100%;
+}
+

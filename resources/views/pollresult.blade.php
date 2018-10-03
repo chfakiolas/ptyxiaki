@@ -19,13 +19,13 @@
         data.addColumn('number', 'Votes');
         data.addRows([
           @foreach($options as $option)
-          @php
-          $totalVotes=0;
-          @endphp
+            @php
+            $totalVotes=0;
+            @endphp
             @foreach($votes as $vote)
               @if($vote->vote === $option->option)
                 @php
-                $totalVotes++;
+                  $totalVotes++;
                 @endphp
               @endif
             @endforeach
@@ -34,26 +34,24 @@
         ]);
 
         // Set chart options
-        var options = {'title':'{{$poll->name}}',
-                       'width':800,
-                       'height':600,
+        var options = {
                        'backgroundColor':'#f5f8fa',
-                       'fontName':'Raleway'
+                       'fontName':'Raleway',
+                       'sliceVisibilityThreshold':0,
                      };
         // Instantiate and draw our chart, passing in some options.
-       var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-       chart.draw(data, options);
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
       }
 </script>
-<div class="row">
-  <div style="width:800; height:600;" class="col-md-6" id="chart_div">
+<div class="row chart-row">
+  <div class="col-sm-12 col-md-6 col-lg-6 chart" id="chart_div" >
   </div>
-  <div class="col-md-6 d-flex justify-content-center">
+  <div class="col-sm-12 col-md-6, col-lg-6 d-flex justify-content-center">
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">{{$poll->name}}</h5>
         <hr>
-        {{-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> --}}
         <h4>Total Votes: {{count($votes)}}</h4>
         <p></p>
         <p class="card-text">{{$poll->description}}</p>
@@ -61,4 +59,5 @@
     </div>
   </div>
 </div>
+<br>
 @endsection
