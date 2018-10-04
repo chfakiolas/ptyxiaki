@@ -37,14 +37,12 @@ class PollsController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-
+        // Validate data
         $request->validate([
-        'name' => 'required|max:255',
-        'option.*' => 'required|max:255',
+            'name' => 'required|max:255',
+            'option.*' => 'required|max:255',
         ]);
 
-        // return $request;
         $poll = new Poll();
         $poll->user_id = auth()->user()->id;
         $poll->name = $request->input('name');
@@ -53,6 +51,7 @@ class PollsController extends Controller
         } else {
             $poll->description = '';
         }
+        $poll->expiration = $request->date . ' ' . $request->time;
         $poll->status = 'In progress';
         $poll->save();
 
@@ -63,7 +62,7 @@ class PollsController extends Controller
             $option->save();
         }
 
-        return redirect('/dashboard')->with('success', 'Your poll has successfully been create!');
+        return redirect('/dashboard')->with('success', 'Your poll has successfully been create!'); //redirect sto dashboard toy xrhsth
     }
 
     /**
@@ -75,16 +74,13 @@ class PollsController extends Controller
     // public function show(Poll $poll)
     public function show($id)
     {
-
-        // Βρίσκω την ψηφοφορία
-        $poll = Poll::find($id);
-        // Βρίσκω τις επιλογές της ψηφοφορίας
-        $options = Poll::find($id)->pollOption;
-        // Εδω θα βρω και τις ψηφους της ψηφοφορίας
-
-        // επιστρέφω το view που δείχνει την ψηφοφορία μαζί με τις μεταβλητές
-        return view('showpoll')->with('poll', $poll)->with('options', $options);
-
+        $poll = Poll::find($id);  // Βρίσκω την ψηφοφορία
+        $options = Poll::find($id)->pollOption;  // Βρίσκω τις επιλογές της ψηφοφορίας
+        if(strtotime($poll->expiration) < time()){
+            return $this->results($id); //return results view
+        } else {
+            return view('showpoll')->with('poll', $poll)->with('options', $options);  //view που δείχνει την ψηφοφορία
+        }
     }
 
     /**
@@ -121,13 +117,11 @@ class PollsController extends Controller
         //
     }
 
-    public function results($id){
+    public function results($id)
+    {
         $poll = Poll::find($id);
         $options = Poll::find($id)->pollOption;
         $votes = Poll::find($id)->vote;
-        // return $ska = array($poll, $options, $votes);
-        // return [$poll, $options, $votes];
         return view('pollresult')->with('poll', $poll)->with('options', $options)->with('votes', $votes);
-        // return $ska;
     }
 }
