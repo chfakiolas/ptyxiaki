@@ -45,7 +45,6 @@
     <div id="new-choice">
         <button type="button" class="btn btn-primary" id="add-choice"><i class="fa fa-plus-square"></i> Add option</button>
     </div>
-
     <br>
     <div>
         {{Form::submit('Submit', ['class'=>'btn btn-default'])}}

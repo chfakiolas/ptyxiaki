@@ -38,6 +38,7 @@
                        'backgroundColor':'#f5f8fa',
                        'fontName':'Raleway',
                        'sliceVisibilityThreshold':0,
+                       'chartArea':{'width':'80%', 'height':'80%'},
                      };
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
