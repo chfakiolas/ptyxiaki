@@ -78,8 +78,10 @@ class PollsController extends Controller
         $poll = Poll::find($id);  // Βρίσκω την ψηφοφορία
         $options = Poll::find($id)->pollOption;  // Βρίσκω τις επιλογές της ψηφοφορίας
         $expiration = $poll->date . ' ' . $poll->time;
-        if(strtotime($expiration) < time() && $poll->status = 'In progress'){
+        if(strtotime($expiration) < time() && $poll->status = 'In progress') {
             return $this->results($id); //return results view
+        } else if(strtotime($expiration) < time() && $poll->status = 'Completed') {
+            return view('showpoll')->with('poll', $poll)->with('options', $options);  //view που δείχνει την ψηφοφορία
         } else {
             $poll->status = 'Completed';
             $poll->save();
@@ -118,7 +120,7 @@ class PollsController extends Controller
      * @param  \App\Poll  $poll
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Poll $poll)
+    public function destroy($id)
     {
         //
     }
