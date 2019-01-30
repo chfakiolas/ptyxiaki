@@ -13,8 +13,8 @@
 
 Auth::routes();
 Route::get('/', 'PollsController@index');                    // Home page
-Route::get('/dashboard', 'DashboardController@index');       // User dashboard *allagh se dashboard
-Route::get('/profile', 'DashboardController@profile');       // User profile sto dashboard
+//Route::get('/dashboard', 'DashboardController@index');       // User dashboard *allagh se dashboard
+//Route::get('/profile', 'DashboardController@profile');       // User profile sto dashboard
 Route::get('/about', 'PagesController@getAbout');            // Get about page controller
 Route::get('/contact', 'MessagesController@show');           // Contact route
 Route::post('/contact', 'MessagesController@store');         // Post request για το μηνυμα
