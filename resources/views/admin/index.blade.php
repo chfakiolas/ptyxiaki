@@ -21,9 +21,9 @@ Dashboard
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>1</h3>
+          <h3>5</h3>
 
-          <p>Total Users</p>
+          <p>Total Polls</p>
         </div>
         <div class="icon">
           <i class="fa fa-users"></i>

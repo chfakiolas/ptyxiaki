@@ -5,6 +5,8 @@ namespace App;
 use Adldap\Laravel\Traits\HasLdapUser;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Adldap\Laravel\Facades\Adldap;
+
 // use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable
@@ -40,7 +42,16 @@ class User extends Authenticatable
     }
 
     public function isAdmin(){
-        return $this->admin; // this looks for an admin column in your users table
+        $mathems = Adldap::search()->where([ //Ψάχνω την οντότητα με τους mathematicians ston LDAP server 
+            ['ou', '=', 'mathematicians'],
+            ['uniquemember', '=', $this->dn], // Κοιτάω αν υπάρχει το dn του user στην οντότητα
+         ]);
+         
+        if($mathems->first()) { //κοιτάει αν το μοντέλο υπάρχει
+            return true;
+        } else {
+            false;
+        }
     }
 
     // Overrides the method to ignore the remember token

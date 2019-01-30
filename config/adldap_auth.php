@@ -262,6 +262,8 @@ return [
 
         'name' => 'cn',
 
+        'dn' => 'dn'
+
     ],
 
     /*

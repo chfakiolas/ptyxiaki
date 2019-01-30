@@ -25,7 +25,16 @@
                     {{-- {{dd(Auth::attempt(['username'=>'euclid', 'password'=>'password']))}} --}}
                     {{-- {{dd(Adldap::search()->users()->find('euclid'))}} --}}
                     {{-- {{dd(Adldap::search()->users()->get())}} --}}
-                    {{-- {{dd(Adldap::search()->where('cn', '=', 'Isaac Newton')->get())}} --}}
+					{{-- {{dd(Adldap::search()->where('cn', '=', 'Isaac Newton')->get())}} --}}
+					{{-- {{dd(Adldap::search()->where('uniquemember', '=', 'uid=euclid,dc=example,dc=com')->get())}} --}}
+					{{-- {{dd(Auth::user()->dn)}} --}}
+					{{-- {{dd(Adldap::search()->where(['ou', '=', 'mathematicians'], ['uniquemember', '=', 'mathematicians'])->get())}} --}}
+					{{-- {{Auth::user()->dn}} --}}
+					{{-- @if(Auth::user()->isAdmin())
+							<p>bitch im admin</p>
+					@else
+						<p>fking hell</p>
+					@endif --}}
                 </div>
 <br>
 @endsection
