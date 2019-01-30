@@ -26,7 +26,7 @@ class PollsController extends Controller
      */
     public function create()
     {
-        return view('createpoll');
+        return view('admin.createpoll');
     }
 
     /**
@@ -62,7 +62,7 @@ class PollsController extends Controller
             $option->save();
         }
 
-        return redirect('/dashboard')->with('success', 'Your poll has successfully been create!'); //redirect sto dashboard toy xrhsth
+        return redirect('/admin')->with('success', 'Your poll has successfully been create!'); //redirect sto dashboard
     }
 
     /**

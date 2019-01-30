@@ -4,15 +4,20 @@ Polls
 @endsection
 @section('content')
 	<div class="row">
-		
+		<div class="col-md-6 offset-md-3">
+			<a class="btn btn-primary" href="#" role="button"><i class="fa fa-plus" aria-hidden="true"></i> New Poll</a>
+			<a class="btn btn-primary" href="#" role="button">Link</a>
+			<a class="btn btn-primary" href="#" role="button">Link</a>
+		</div>
 	</div>
+	<br>
 	<div class="row">
 		<div class="col-md-6 offset-md-3">
 			<table class="table table-striped">
 				<thead class="thead-dark">
 					<tr>
 					  <th scope="col">ID</th>
-					  <th scope="col">Name</th>
+					  <th scope="col">Title</th>
 					  <th scope="col">Actions</th>
 					</tr>
 				</thead>
