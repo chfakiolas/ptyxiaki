@@ -16,18 +16,17 @@
 // });
 
 Auth::routes();
-Route::get('/', 'PollsController@index');               // Home page
-Route::get('/dashboard', 'DashboardController@index');  // User dashboard *allagh se dashboard
-Route::get('/profile', 'DashboardController@profile');  // User profile sto dashboard
-Route::get('/about', 'PagesController@getAbout');       // Get about page controller
-Route::get('/createpoll', 'PollsController@create');    // Create poll page
-Route::post('/createpoll', 'PollsController@store');    // create poll post request
-Route::get('/contact', 'MessagesController@show');      // Contact route
-Route::post('/contact', 'MessagesController@store');    // Post request για το μηνυμα
-Route::get('/polls/{id}', 'PollsController@show');      // Route psifoforias
-Route::post('/polls/vote', 'VotesController@store');    // Post route gia thn apostolh pshfoy
+Route::get('/', 'PollsController@index');                    // Home page
+Route::get('/dashboard', 'DashboardController@index');       // User dashboard *allagh se dashboard
+Route::get('/profile', 'DashboardController@profile');       // User profile sto dashboard
+Route::get('/about', 'PagesController@getAbout');            // Get about page controller
+Route::get('/createpoll', 'PollsController@create');         // Create poll page
+Route::post('/createpoll', 'PollsController@store');         // create poll post request
+Route::get('/contact', 'MessagesController@show');           // Contact route
+Route::post('/contact', 'MessagesController@store');         // Post request για το μηνυμα
+Route::get('/polls/{id}', 'PollsController@show');           // Route psifoforias
+Route::post('/polls/vote', 'VotesController@store');         // Post route gia thn apostolh pshfoy
 Route::get('/polls/{id}/results', 'PollsController@results');// Route apotelesmatwn psifoforias
-Route::get('/test', 'PagesController@testPage');
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin', 'AdminController@index');                    // Admin index page
     Route::get('/admin/users', 'AdminController@users');              // Admin users page
