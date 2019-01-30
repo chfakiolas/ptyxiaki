@@ -78,10 +78,13 @@ class PollsController extends Controller
         $poll = Poll::find($id);  // Βρίσκω την ψηφοφορία
         $options = Poll::find($id)->pollOption;  // Βρίσκω τις επιλογές της ψηφοφορίας
         $expiration = $poll->date . ' ' . $poll->time;
-        if(strtotime($expiration) < time() && $poll->status = 'In progress') {
-            return $this->results($id); //return results view
-        } else if(strtotime($expiration) < time() && $poll->status = 'Completed') {
+        $notExpired = strtotime($expiration) > time();
+        $pollInPorgress = $poll->status == 'In progress';
+        $pollCompleted = $poll->status == 'Completed';
+        if($notExpired && $pollInPorgress) {
             return view('showpoll')->with('poll', $poll)->with('options', $options);  //view που δείχνει την ψηφοφορία
+        } else if($pollCompleted) {
+            return $this->results($id); //return results view
         } else {
             $poll->status = 'Completed';
             $poll->save();
@@ -99,7 +102,20 @@ class PollsController extends Controller
     {
         $poll = Poll::find($id);
         $options = Poll::find($id)->pollOption;
-        return view('admin.editpoll')->with('poll', $poll)->with('options', $options);
+        $expiration = $poll->date . ' ' . $poll->time;
+        $notExpired = strtotime($expiration) > time(); // Συγκρίνω την ημερομηνία και ώρα της ψηφοφορίας με την τωρινή
+        $pollInPorgress = $poll->status == 'In progress';
+        $pollCompleted = $poll->status == 'Completed';
+        if($notExpired && $pollInPorgress){
+            return view('admin.editpoll')->with('poll', $poll)->with('options', $options);
+        } else if($pollCompleted) {
+            return redirect('/admin')->with('error', 'Η ψηφοφορια έχει λήξει και δε μπορεί να επεξεργαστεί.'); //redirect sto dashboard
+        } else {
+            $poll->status = 'Completed';
+            $poll->save();
+            return redirect('/admin')->with('error', 'Η ψηφοφορια έχει λήξει και δε μπορεί να επεξεργαστεί.'); //redirect sto dashboard
+        }
+        
     }
 
     /**
