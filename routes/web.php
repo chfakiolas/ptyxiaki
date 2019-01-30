@@ -27,12 +27,14 @@ Route::post('/contact', 'MessagesController@store');    // Post request για �
 Route::get('/polls/{id}', 'PollsController@show');      // Route psifoforias
 Route::post('/polls/vote', 'VotesController@store');    // Post route gia thn apostolh pshfoy
 Route::get('/polls/{id}/results', 'PollsController@results');// Route apotelesmatwn psifoforias
-Route::get('/admin', 'AdminController@index')->middleware('admin');// Admin index page
-Route::get('/admin/users', 'AdminController@users')->middleware('admin');// Admin users page
-Route::get('/admin/polls', 'AdminController@polls')->middleware('admin');// Admin polls page
-Route::get('/admin/profile', 'AdminController@profile')->middleware('admin');// Admin profile
-Route::get('/logout', 'AdminController@logout');        // Logout link admin
-Route::get('/admin/newadmin', 'AdminController@newAdmin')->middleware('admin');// New admin view
-Route::post('/admin/newadmin', 'AdminController@createAdmin');// New admin form submit
-Route::get('/admin/messages', 'MessagesController@adminMessages')->middleware('admin');// Admin get messages route
 Route::get('/test', 'PagesController@testPage');
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/admin', 'AdminController@index');                    // Admin index page
+    Route::get('/admin/users', 'AdminController@users');              // Admin users page
+    Route::get('/admin/polls', 'AdminController@polls');              // Admin polls page
+    Route::get('/admin/profile', 'AdminController@profile');          // Admin profile
+    Route::get('/admin/messages', 'MessagesController@adminMessages');// Admin get messages route
+    Route::get('/admin/newadmin', 'AdminController@newAdmin');        // New admin view
+    Route::post('/admin/newadmin', 'AdminController@createAdmin');    // New admin form submit
+    Route::get('/logout', 'AdminController@logout');                  // Logout link admin
+});
