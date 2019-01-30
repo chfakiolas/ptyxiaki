@@ -51,7 +51,8 @@ class PollsController extends Controller
         } else {
             $poll->description = '';
         }
-        $poll->expiration = $request->date . ' ' . $request->time;
+        $poll->date = $request->date;
+        $poll->time = $request->time;
         $poll->status = 'In progress';
         $poll->save();
 
@@ -62,7 +63,7 @@ class PollsController extends Controller
             $option->save();
         }
 
-        return redirect('/admin')->with('success', 'Your poll has successfully been create!'); //redirect sto dashboard
+        return redirect('/admin')->with('success', 'Η ψηφοφορια δημιουργήθηκε με επιτυχία!'); //redirect sto dashboard
     }
 
     /**
@@ -76,9 +77,12 @@ class PollsController extends Controller
     {
         $poll = Poll::find($id);  // Βρίσκω την ψηφοφορία
         $options = Poll::find($id)->pollOption;  // Βρίσκω τις επιλογές της ψηφοφορίας
-        if(strtotime($poll->expiration) < time()){
+        $expiration = $poll->date . ' ' . $poll->time;
+        if(strtotime($expiration) < time() && $poll->status = 'In progress'){
             return $this->results($id); //return results view
         } else {
+            $poll->status = 'Completed';
+            $poll->save();
             return view('showpoll')->with('poll', $poll)->with('options', $options);  //view που δείχνει την ψηφοφορία
         }
     }
@@ -89,9 +93,11 @@ class PollsController extends Controller
      * @param  \App\Poll  $poll
      * @return \Illuminate\Http\Response
      */
-    public function edit(Poll $poll)
+    public function edit($id)
     {
-        //
+        $poll = Poll::find($id);
+        $options = Poll::find($id)->pollOption;
+        return view('admin.editpoll')->with('poll', $poll)->with('options', $options);
     }
 
     /**
@@ -117,6 +123,7 @@ class PollsController extends Controller
         //
     }
 
+    // Return poll results in view
     public function results($id)
     {
         $poll = Poll::find($id);
