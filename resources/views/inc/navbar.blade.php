@@ -15,9 +15,6 @@
       <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
         <a class="nav-link" href="/about">About</a>
       </li>
-      <li class="nav-item {{ Request::is('test') ? 'active' : '' }}">
-        <a class="nav-link" href="/test">TEST</a>
-      </li>
     </ul>
     <ul id="nav" class="navbar-nav ml-auto">
       @guest

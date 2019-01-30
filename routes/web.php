@@ -11,10 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 Route::get('/', 'PollsController@index');                    // Home page
 Route::get('/dashboard', 'DashboardController@index');       // User dashboard *allagh se dashboard
@@ -33,7 +29,5 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/polls', 'AdminController@polls');              // Admin polls page
     Route::get('/admin/profile', 'AdminController@profile');          // Admin profile
     Route::get('/admin/messages', 'MessagesController@adminMessages');// Admin get messages route
-    Route::get('/admin/newadmin', 'AdminController@newAdmin');        // New admin view
-    Route::post('/admin/newadmin', 'AdminController@createAdmin');    // New admin form submit
     Route::get('/logout', 'AdminController@logout');                  // Logout link admin
 });

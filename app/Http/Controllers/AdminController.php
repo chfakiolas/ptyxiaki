@@ -33,34 +33,7 @@ class AdminController extends Controller
         return view('admin.profile');
     }
 
-    // Return form view
-    public function newAdmin(){
-        return view('admin.newadmin');
-    }
-
-    // Post request form
-    public function createAdmin(Request $request){
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'unique:users|required|string|max:255',
-            'email' => 'email|unique:users|required|string|max:255',
-            'password' => 'confirmed|min:6|required|string|max:255',
-        ]);
-
-        $admin = new User();
-        $admin->name = $request->input('name');
-        $admin->username = $request->input('username');
-        $admin->email = $request->input('email');
-        $admin->admin = 1;
-        $admin->password = Hash::make($request->input('password'));
-        
-        if ($admin->save()) {
-            return redirect('/admin')->with('success', 'Admin has successfully been created');
-        }
-    }
-
-    // Logout method edw
-    public function logout () {
+    public function logout () { // Logout method
         //logout user
         auth()->logout();
         // redirect to homepage

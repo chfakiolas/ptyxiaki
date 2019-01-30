@@ -7,12 +7,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/" class="nav-link">Homepage</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/admin/newadmin" class="nav-link">New Admin</a>
-      </li>
-     {{--  <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li> --}}
     </ul>
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
