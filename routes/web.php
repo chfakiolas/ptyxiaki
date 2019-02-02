@@ -31,5 +31,5 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/createpoll', 'PollsController@store');        // Create poll POST request
     Route::delete('/admin/polls/{id}', 'PollsController@destroy');
     Route::get('/admin/polls/edit/{id}', 'PollsController@edit');
-    Route::post('/admin/polls/edit', 'PollsController@update');
+    Route::put('/admin/polls/edit', 'PollsController@update');
 });

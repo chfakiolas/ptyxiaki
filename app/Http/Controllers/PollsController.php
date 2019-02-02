@@ -125,9 +125,39 @@ class PollsController extends Controller
      * @param  \App\Poll  $poll
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Poll $poll)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+        $options = Poll::find($id)->pollOption;
+        // return $options;
+        // Validate data
+        $request->validate([
+            'name' => 'required|max:255',
+            'option.*' => 'required|max:255',
+            'date' => 'required|max:255',
+            'time' => 'required|max:255',
+            'description' => 'required|max:255',
+        ]);
+        $id = $request->id;
+        $poll = Poll::find($id);
+        $poll->user_id = auth()->user()->id;
+        $poll->name = $request->name;
+        $poll->date = $request->date;
+        $poll->time = $request->time;
+        $poll->description = $request->description;
+        $poll->save();
+
+        $options = Poll::find($id)->pollOption; // βρισκει τα options του Poll στην βάση
+        $updatedOptions = array_combine($request->optionId, $request->option); // Ενώνει τους πίνακες key ειναι το id value το option
+        
+        foreach($updatedOptions as $key => $value){
+            foreach($options as $option){
+                if( $option->id == $key){
+                    $option->option = $value;
+                    $option->save();
+                }
+            }
+        }
     }
 
     /**

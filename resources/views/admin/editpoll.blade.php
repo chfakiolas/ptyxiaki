@@ -5,7 +5,8 @@
 @section('content')
 <div class="row">
     <div class="col-md-6 offset-md-3">
-        {!! Form::open(['action' => 'PollsController@store']) !!}
+        {!! Form::open(['method' => 'PUT', 'action' => 'PollsController@update']) !!}
+            {{ Form::hidden('id', $poll->id) }}
             <div class="form-group row">
                 <div class="col-md-2">
                     {{Form::label('name', 'Poll Name', ['class' => 'col-form-label'])}}
@@ -31,8 +32,9 @@
             </div>
             <div class="form-group" id="options">
                 @foreach($options as $option)
+                {{Form::hidden('optionId[]', $option->id)}}
                 <div class="form-group row" data-id="1">
-                    {{Form::label('option1', 'Poll option 1', ['class' => 'col-sm-2 col-form-label'])}}
+                    {{Form::label('option', 'Poll option', ['class' => 'col-sm-2 col-form-label'])}}
                     <div class="col-sm-10">
                         {{Form::text('option[]', $option->option, ['class' => 'form-control', 'placeholder' => 'Poll option 1'])}}
                     </div>
