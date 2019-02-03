@@ -158,6 +158,8 @@ class PollsController extends Controller
                 }
             }
         }
+
+        return redirect('/admin/polls')->with('success', 'Η ψηφοφορια έχει ενημερωθεί.');
     }
 
     /**
@@ -168,7 +170,22 @@ class PollsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $poll = Poll::find($id);
+        $votes = Poll::find($id)->vote;
+        $voteExist = $votes->first();
+        // return $voteExist;
+        if($voteExist) {
+            $poll->status = 'Completed';
+            $poll->save();
+            return redirect('/admin/polls')->with('success', 'Η ψηφοφορια έχει ολοκληρωθεί.');
+        } else {
+            $options = $poll->pollOption; // Βρίσκω τις επιλογές της ψηφοφορίας
+            foreach($options as $o) {
+                $o->delete();
+            }
+            $poll->delete();
+            return redirect('/admin/polls')->with('success', 'Η ψηφοφορια έχει διαγραφεί.');
+        }
     }
 
     // Return poll results in view

@@ -10,6 +10,7 @@ Polls
 					<tr>
 					  <th scope="col">ID</th>
 					  <th class="text-center" scope="col">Τίτλος</th>
+					  <th class="text-center" scope="col">Κατάσταση</th>
 					  <th class="text-center" scope="col">Ενέργειες</th>
 					</tr>
 				</thead>
@@ -18,7 +19,13 @@ Polls
 					<tr id="{{$poll->id}}">
 						<td>{{$poll->id}}</td>
 						<td class="text-center">{{$poll->name}}</td>
-					<td class="text-center"><a class="btn btn-info" href="/admin/polls/edit/{{$poll->id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Επεξεργασία</a>    <a class="btn btn-danger" href="/admin/polls/{{$poll->id}}"><i class="fa fa-trash-o" aria-hidden="true"></i> Διαγραφή</a></td>
+						<td class="text-center"><b>{{$poll->status}}</b></td>
+						<td class="text-center">
+							<a class="btn btn-info" href="/admin/polls/edit/{{$poll->id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Επεξεργασία</a>
+							{!! Form::open(['route' => ['delete-poll', $poll->id], 'method' => 'delete']) !!}
+								{{Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Διαγραφή', ['type' => 'submit', 'class' => 'btn btn-danger delete-poll'])}}
+							{!! Form::close() !!}
+						</td>
 					</tr>
 					@endforeach
 				</tbody>

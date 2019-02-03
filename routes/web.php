@@ -21,15 +21,19 @@ Route::post('/polls/vote', 'VotesController@store');         // Post route gia t
 Route::get('/polls/{id}/results', 'PollsController@results');// Route apotelesmatwn psifoforias
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/admin', 'AdminController@index');                    // Admin index page
-    Route::get('/admin/users', 'AdminController@users');              // Admin users page
-    Route::get('/admin/polls', 'AdminController@polls');              // Admin polls page
-    Route::get('/admin/profile', 'AdminController@profile');          // Admin profile
-    Route::get('/admin/messages', 'MessagesController@adminMessages');// Admin get messages route
-    Route::get('/logout', 'AdminController@logout');                  // Logout link admin
-    Route::get('/admin/createpoll', 'PollsController@create');        // Create poll page
-    Route::post('/admin/createpoll', 'PollsController@store');        // Create poll POST request
-    Route::delete('/admin/polls/{id}', 'PollsController@destroy');
-    Route::get('/admin/polls/edit/{id}', 'PollsController@edit');
-    Route::put('/admin/polls/edit', 'PollsController@update');
+    Route::prefix('admin')->group(function () {
+        Route::get('/', 'AdminController@index');                   // Admin index page
+        Route::get('/users', 'AdminController@users');              // Admin users page
+        Route::get('/polls', 'AdminController@polls');              // Admin polls page
+        Route::get('/profile', 'AdminController@profile');          // Admin profile
+        Route::get('/messages', 'MessagesController@adminMessages');// Admin get messages route
+        Route::get('/createpoll', 'PollsController@create');        // Create poll page
+        Route::post('/createpoll', 'PollsController@store');        // Create poll POST request
+        Route::delete('/polls/{id}', 'PollsController@destroy');    //
+        Route::get('/polls/edit/{id}', 'PollsController@edit');     // Edit view route
+        Route::put('/polls/edit', 'PollsController@update');        // Edit put request
+        Route::delete('/polls/{id}/delete', 'PollsController@destroy')->name('delete-poll');
+    });
+
+    Route::get('/logout', 'AdminController@logout');                  // Logout link admin 
 });
