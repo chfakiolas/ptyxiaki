@@ -20,11 +20,15 @@ Polls
 						<td>{{$poll->id}}</td>
 						<td class="text-center">{{$poll->name}}</td>
 						<td class="text-center"><b>{{$poll->status}}</b></td>
-						<td class="text-center">
-							<a class="btn btn-info" href="/admin/polls/edit/{{$poll->id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Επεξεργασία</a>
-							{!! Form::open(['route' => ['delete-poll', $poll->id], 'method' => 'delete']) !!}
-								{{Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Διαγραφή', ['type' => 'submit', 'class' => 'btn btn-danger delete-poll'])}}
-							{!! Form::close() !!}
+						<td>
+								<div class="b-inline">
+									<a class="btn btn-info" href="/admin/polls/edit/{{$poll->id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Επεξεργασία</a>
+								</div>
+								<div class="b-inline">
+									{!! Form::open(['route' => ['delete-poll', $poll->id], 'method' => 'delete']) !!}
+										{{Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Διαγραφή', ['type' => 'submit', 'class' => 'btn btn-danger delete-poll'])}}
+									{!! Form::close() !!}
+								</div>
 						</td>
 					</tr>
 					@endforeach

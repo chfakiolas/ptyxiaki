@@ -19,6 +19,7 @@ class CreatePollsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('status');
+            $table->string('type');
             $table->date('date');
             $table->time('time');
             $table->timestamps();

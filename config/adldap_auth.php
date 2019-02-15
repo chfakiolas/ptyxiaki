@@ -255,14 +255,15 @@ return [
     |
     */
 
-    'sync_attributes' => [
+    'sync_attributes' => [ // Εδώ κάνω sync db => ldap
 
-        'username' => 'uid', // Changed from `samaccountname`
-        // 'email' => 'userprincipalname',
+        'username' => 'uid',
 
         'name' => 'cn',
 
-        'dn' => 'dn'
+        'dn' => 'dn',
+
+        'email' => 'mail'
 
     ],
 

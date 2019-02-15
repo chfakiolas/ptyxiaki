@@ -32,7 +32,7 @@ Route::group(['middleware' => 'admin'], function () {
         Route::delete('/polls/{id}', 'PollsController@destroy');    //
         Route::get('/polls/edit/{id}', 'PollsController@edit');     // Edit view route
         Route::put('/polls/edit', 'PollsController@update');        // Edit put request
-        Route::delete('/polls/{id}/delete', 'PollsController@destroy')->name('delete-poll');
+        Route::delete('/polls/{id}/delete', 'PollsController@destroy')->name('delete-poll'); //Delete request route
     });
 
     Route::get('/logout', 'AdminController@logout');                  // Logout link admin 
