@@ -3,7 +3,7 @@
 Create Poll
 @endsection
 @section('content')
-<div class="col-md-6 offset-md-3">
+<div class="col-md-8 offset-md-2">
     {!! Form::open(['action' => 'PollsController@store']) !!}
         <div class="form-group row">
             <div class="col-md-2">
@@ -22,6 +22,14 @@ Create Poll
             </div>
             <div class="form-group col-md-5">
                 {{ Form::input('time', 'time', '', array('class' => 'form-control')) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="form-group col-md-4 offset-md-2">
+                {!! Form::bsRadio('Ανώνυμη Ψηφοφορία', 'votetype', 'anonymous', ['id' => 'anonymous']) !!}
+            </div>
+            <div class="form-group col-md-4">
+                {!! Form::bsRadio('Επώνυμη Ψηφοφορία', 'votetype', 'eponymous', ['id' => 'eponymous']) !!}
             </div>
         </div>
         <div class="form-group">

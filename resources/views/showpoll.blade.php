@@ -9,7 +9,7 @@
 	{{Form::open(['action' => 'VotesController@store', 'method' => 'POST'])}}
 	{{Form::hidden('poll_id', $poll->id)}}
 	@foreach($options as $option)
-		{{Form::bsRadio($option->option, $option->option, ['id' => $option->option])}}
+		{{Form::bsRadio($option->option, 'vote', $option->option, ['id' => $option->option])}}
 	<br>
 	@endforeach
 	{{Form::bsSubmit('Vote', ['class' => 'btn btn-success'])}}

@@ -8,7 +8,7 @@
 	@if(count($polls) > 0)
 	<ul class="list-group">
 	@foreach($polls as $poll)
-		<li class="list-group-item"><a href="/polls/{{$poll->id}}">{{$poll->name}}</a></li>
+		<li class="list-group-item"><a href="/polls/{{$poll->uuid}}">{{$poll->name}}</a></li>
 	@endforeach
 	</ul>
 	<br>

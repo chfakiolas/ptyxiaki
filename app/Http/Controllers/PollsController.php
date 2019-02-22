@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Poll;
 use Illuminate\Http\Request;
 use App\PollOption;
+use Webpatser\Uuid\Uuid; //UUID class generator
 
 class PollsController extends Controller
 {
@@ -44,10 +45,12 @@ class PollsController extends Controller
         ]);
 
         $poll = new Poll();
+        $poll->uuid = Uuid::generate();
         $poll->user_id = auth()->user()->id;
-        $poll->name = $request->input('name');
-        if (!empty($request->input('description'))) {
-            $poll->description = $request->input('description');
+        $poll->name = $request->name;
+        $poll->type = $request->votetype;
+        if (!empty($request->description)) {
+            $poll->description = $request->description;
         } else {
             $poll->description = '';
         }
@@ -73,10 +76,11 @@ class PollsController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function show(Poll $poll)
-    public function show($id)
+    public function show($uuid)
     {
-        $poll = Poll::find($id);  // Βρίσκω την ψηφοφορία
-        $options = Poll::find($id)->pollOption;  // Βρίσκω τις επιλογές της ψηφοφορίας
+        $poll = Poll::where('uuid', $uuid)->first();  // Βρίσκω την ψηφοφορία
+        //return $poll;
+        $options = Poll::find($poll->id)->pollOption;  // Βρίσκω τις επιλογές της ψηφοφορίας
         $expiration = $poll->date . ' ' . $poll->time;
         $notExpired = strtotime($expiration) > time();
         $pollInPorgress = $poll->status == 'In progress';
@@ -84,7 +88,7 @@ class PollsController extends Controller
         if($notExpired && $pollInPorgress) {
             return view('showpoll')->with('poll', $poll)->with('options', $options);  //view που δείχνει την ψηφοφορία
         } else if($pollCompleted) {
-            return $this->results($id); //return results view
+            return $this->results($poll->id); //return results view
         } else {
             $poll->status = 'Completed';
             $poll->save();

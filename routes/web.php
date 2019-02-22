@@ -16,12 +16,12 @@ Route::get('/', 'PollsController@index');                    // Home page
 Route::get('/about', 'PagesController@getAbout');            // Get about page controller
 Route::get('/contact', 'MessagesController@show');           // Contact route
 Route::post('/contact', 'MessagesController@store');         // Post request για το μηνυμα
-Route::get('/polls/{id}', 'PollsController@show');           // Route psifoforias
+Route::get('/polls/{uuid}', 'PollsController@show');           // Route psifoforias
 Route::post('/polls/vote', 'VotesController@store');         // Post route gia thn apostolh pshfoy
-Route::get('/polls/{id}/results', 'PollsController@results');// Route apotelesmatwn psifoforias
+Route::get('/polls/{uuid}/results', 'PollsController@results');// Route apotelesmatwn psifoforias
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function () {                     // Κάνει prepend /admin στο route
         Route::get('/', 'AdminController@index');                   // Admin index page
         Route::get('/users', 'AdminController@users');              // Admin users page
         Route::get('/polls', 'AdminController@polls');              // Admin polls page
