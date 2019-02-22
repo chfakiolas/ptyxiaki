@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Poll;
 use Illuminate\Http\Request;
-use App\PollOption;
-use Webpatser\Uuid\Uuid; //UUID class generator
+use App\PollOption; //Μπορει να μην το χρειαζομαι να δω τις σχέσεις.
+use App\User;
+use Webpatser\Uuid\Uuid; // UUID class generator
+use App\Mail\VoteMail; // Mail class για αποστολή των mails
+use App\Vote;
 
 class PollsController extends Controller
 {
@@ -58,6 +61,19 @@ class PollsController extends Controller
         $poll->time = $request->time;
         $poll->status = 'In progress';
         $poll->save();
+
+        /* Έλεγχος αν η ψηφοφορία είναι ανώνυμη τότε δημιουργούμε τις ψήφους 
+         και τις αποστέλουμε στους χρήστες */
+        if ($poll->type == 'anonymous') {
+            $users = User::all();
+            foreach ($users as $user) {
+                $vote = new Vote();
+                $vote->poll_id = $poll->id;
+                $vote->token = Uuid::generate();
+                $vote->save();
+                \Mail::to($user)->queue(new VoteMail($poll, $vote));
+            }
+        }
 
         foreach ($request->option as $value) {
             $option = new PollOption();
