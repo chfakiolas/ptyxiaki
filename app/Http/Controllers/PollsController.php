@@ -65,8 +65,11 @@ class PollsController extends Controller
         /* Έλεγχος αν η ψηφοφορία είναι ανώνυμη τότε δημιουργούμε τις ψήφους 
          και τις αποστέλουμε στους χρήστες */
         if ($poll->type == 'anonymous') {
+            // Παίρνω όλους τους χρήστες από τη βάση
             $users = User::all();
-            foreach ($users as $user) {
+            // Ανακατεύω τους χρήστες τυχαία και στέλνω το μειλ με το τόκεν τους και την ψηφοφορία
+            $shuffledUsers = $users->shuffle();
+            foreach ($shuffledUsers as $user) {
                 $vote = new Vote();
                 $vote->poll_id = $poll->id;
                 $vote->token = Uuid::generate();
