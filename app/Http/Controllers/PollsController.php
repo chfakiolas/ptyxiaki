@@ -227,42 +227,36 @@ class PollsController extends Controller
     public function results($uuid)
     {
         $poll = Poll::where('uuid', $uuid)->first();
-        // $poll = Poll::find($id);
         $options = Poll::find($poll->id)->pollOption;
         // $votes = Poll::find($poll->id)->vote->where('vote', '!=', null)->get();
         $votes = Vote::where('poll_id', $poll->id)->where('vote', '!=', null)->get();
-        // return $votes;
         return view('pollresult', compact('poll', 'options', 'votes')); 
     }
 
     public function showAnon($uuid, $token)
     {
-
-        $vote = Vote::where('token', $token)->first();
-        // if (!is_null($vote->vote)) {
-        //     return redirect('/polls/' . $uuid . '/results');
-        // }
-        
         $poll = Poll::where('uuid', $uuid)->first();  // Βρίσκω την ψηφοφορία
         $vote = Poll::find($poll->id)->vote()->where('token', $token)->first(); //Βρίσκω την ψήφο στη βάση
+
         // Κάνω έλεγχο αν έχει ψηφίσει με αυτό το τόκεν
         if (!is_null($vote->vote)) {
-                return redirect('/polls/' . $uuid . '/results'); // ανακατεύθυνση στα αποτελέσματα
-            }
+            return redirect('/polls/' . $uuid . '/results'); // ανακατεύθυνση στα αποτελέσματα
+        }
+        
         $options = Poll::find($poll->id)->pollOption;  // Βρίσκω τις επιλογές της ψηφοφορίας
         $expiration = $poll->date . ' ' . $poll->time;
         $notExpired = strtotime($expiration) > time();
         $pollInPorgress = $poll->status == 'In progress';
         $pollCompleted = $poll->status == 'Completed';
+
         if($notExpired && $pollInPorgress) {
-            return view('anonpoll', compact('token', 'poll', 'options'));
-            // return view('anonpoll')->with('poll', $poll)->with('options', $options);  //view που δείχνει την ψηφοφορία
+            return view('anonpoll', compact('token', 'poll', 'options')); //view που δείχνει την φόρμα για την ψηφοφορία
         } else if($pollCompleted) {
-            return $this->results($poll->id); //return results view
+            return $this->results($poll->uuid); //return results view
         } else {
             $poll->status = 'Completed';
             $poll->save();
-            return view('anonpoll')->with('poll', $poll)->with('options', $options);  //view που δείχνει την ψηφοφορία
+            return $this->results($poll->uuid);
         }
     }
 }
