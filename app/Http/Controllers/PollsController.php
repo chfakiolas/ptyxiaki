@@ -229,8 +229,10 @@ class PollsController extends Controller
         $poll = Poll::where('uuid', $uuid)->first();
         // $poll = Poll::find($id);
         $options = Poll::find($poll->id)->pollOption;
-        $votes = Poll::find($poll->id)->vote;
-        return view('pollresult', compact('poll', 'options', 'votes')); //->with('poll', $poll)->with('options', $options)->with('votes', $votes);
+        // $votes = Poll::find($poll->id)->vote->where('vote', '!=', null)->get();
+        $votes = Vote::where('poll_id', $poll->id)->where('vote', '!=', null)->get();
+        // return $votes;
+        return view('pollresult', compact('poll', 'options', 'votes')); 
     }
 
     public function showAnon($uuid, $token)

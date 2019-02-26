@@ -44,6 +44,7 @@ class VotesController extends Controller
 
     public function anonStore(Request $request)
     {
+        // Έλεγχος αν έχει επιλεγεί ψήφος κατά το submit
         $request->validate([
             'vote' => 'required'
         ]);
@@ -54,22 +55,5 @@ class VotesController extends Controller
             'vote' => $request->vote 
         ]);
         return redirect('/polls/' . $request->uuid . '/results')->with('success', 'Η ψήφος σας έχει καταχωρηθεί!');
-
-        // // Ελέγχω αν έχει χρησιμοποιηθεί το token 
-        // if (is_null($anonVote->vote)) {
-        //     Vote::where('token', $request->token)->update([
-        //         'vote' => $request->vote 
-        //     ]);
-        //     return redirect('/polls/' . $request->uuid . '/results')->with('success', 'Your Vote has been Submited!');
-        // } else {
-        //     return redirect('/polls/' . $request->uuid . '/results');
-        // }
-        
-
-
-        // $anonVote = Vote::where('token', $request->token);
-        // $anonVote->poll_id = $request->poll_id;
-        // $anonVote->vote = $request->vote;
-        // $anonVote->save();
     }
 }
