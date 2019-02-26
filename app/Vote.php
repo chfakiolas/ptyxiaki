@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model
 {
+    protected $fillable = ['vote'];
 	// Eloquent relationship one to many
     public function user(){
     	return $this->hasOne('App\User');

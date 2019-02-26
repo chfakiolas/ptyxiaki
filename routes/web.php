@@ -12,13 +12,16 @@
 */
 
 Auth::routes();
-Route::get('/', 'PollsController@index');                    // Home page
-Route::get('/about', 'PagesController@getAbout');            // Get about page controller
-Route::get('/contact', 'MessagesController@show');           // Contact route
-Route::post('/contact', 'MessagesController@store');         // Post request για το μηνυμα
-Route::get('/polls/{uuid}', 'PollsController@show');           // Route psifoforias
-Route::post('/polls/vote', 'VotesController@store');         // Post route gia thn apostolh pshfoy
-Route::get('/polls/{uuid}/results', 'PollsController@results');// Route apotelesmatwn psifoforias
+Route::get('/', 'PollsController@index');                       // Home page
+Route::get('/about', 'PagesController@getAbout');               // Get about page controller
+Route::get('/contact', 'MessagesController@show');              // Contact route
+Route::post('/contact', 'MessagesController@store');            // Post request για το μηνυμα
+Route::get('/polls/{uuid}', 'PollsController@show');            // Route psifoforias
+Route::post('/polls/vote', 'VotesController@store');            // Post request gia thn apostolh pshfoy
+Route::get('/polls/{uuid}/results', 'PollsController@results'); // Route apotelesmatwn psifoforias
+
+Route::get('/polls/anon/{uuid}&{token}', 'PollsController@showAnon');
+Route::put('/polls/anon/vote', 'VotesController@anonStore');
 
 Route::group(['middleware' => 'admin'], function () {
     Route::prefix('admin')->group(function () {                     // Κάνει prepend /admin στο route
@@ -29,7 +32,7 @@ Route::group(['middleware' => 'admin'], function () {
         Route::get('/messages', 'MessagesController@adminMessages');// Admin get messages route
         Route::get('/createpoll', 'PollsController@create');        // Create poll page
         Route::post('/createpoll', 'PollsController@store');        // Create poll POST request
-        Route::delete('/polls/{id}', 'PollsController@destroy');    //
+        Route::delete('/polls/{id}', 'PollsController@destroy');    // Request για διαγραφη/κατάργηση της ψηφοφορίας
         Route::get('/polls/edit/{id}', 'PollsController@edit');     // Edit view route
         Route::put('/polls/edit', 'PollsController@update');        // Edit put request
         Route::delete('/polls/{id}/delete', 'PollsController@destroy')->name('delete-poll'); //Delete request route

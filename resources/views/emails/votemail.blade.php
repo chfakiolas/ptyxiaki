@@ -311,7 +311,7 @@
                     <tr>
                       <td>
                         <p>Hi there,</p>
-                        <a href="{{url("/polls/{$poll->uuid}")}}">{{url("/polls/{$poll->uuid}")}}</a>
+                        <a href="{{url("/polls/anon/{$poll->uuid}&{$vote->token}")}}">{{url("/polls/anon/{$poll->uuid}&{$vote->token}")}}</a>
                         <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
