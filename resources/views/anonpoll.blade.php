@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-	<a href="/" class="btn btn-primary float-left">Back</a><a href="/polls/{{$poll->id}}/results" class="btn btn-primary float-right">Results</a>
+	<a href="/" class="btn btn-primary float-left">Back</a><a href="/polls/{{$poll->uuid}}/results" class="btn btn-primary float-right">Results</a>
 	<br><br>
 	<h2 class="text-center">{{$poll->name}}</h2>
 	<br>
