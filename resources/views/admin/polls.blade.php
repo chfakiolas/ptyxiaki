@@ -4,7 +4,7 @@ Polls
 @endsection
 @section('content')
 	<div class="row">
-		<div class="col-md-6 offset-md-3">
+		<div class="col-md-10 offset-md-1">
 			<table id="polls-table" class="table table-striped">
 				<thead class="thead-dark">
 					<tr>
@@ -20,14 +20,19 @@ Polls
 						<td>{{$poll->id}}</td>
 						<td class="text-center">{{$poll->name}}</td>
 						<td class="text-center"><b>{{$poll->status}}</b></td>
-						<td>
-								<div class="b-inline">
+						<td class="btn-group">
+								<div>
 									<a class="btn btn-info" href="/admin/polls/edit/{{$poll->id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Επεξεργασία</a>
 								</div>
-								<div class="b-inline">
+								&nbsp;
+								<div>
 									{!! Form::open(['route' => ['delete-poll', $poll->id], 'method' => 'delete']) !!}
 										{{Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Διαγραφή', ['type' => 'submit', 'class' => 'btn btn-danger delete-poll'])}}
 									{!! Form::close() !!}
+								</div>
+								&nbsp;
+								<div>
+									<a class="btn btn-success" href="#"><i class="fa fa-eye" aria-hidden="true"></i> Προβολή</a>
 								</div>
 						</td>
 					</tr>
