@@ -20,8 +20,7 @@ class AdminController extends Controller
     }
 
     public function polls(){
-        $polls = Poll::paginate(15);
-        // $polls = Poll::all()->paginate(10);
+        $polls = Poll::orderBy('id', 'desc')->paginate(10);
     	return view('admin.polls')->with('polls', $polls);
     }
 
