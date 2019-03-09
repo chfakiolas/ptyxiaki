@@ -99,6 +99,12 @@ class PollsController extends Controller
     {
         $poll = Poll::where('uuid', $uuid)->first();  // Βρίσκω την ψηφοφορία
 
+        // ελέγχω αν ο χρήστης έχει ψηφίσει τότε να ανακτευθύνεται στα αποτελέσματα της ψηφοφορίας
+        $exstVote = Vote::where('user_id', auth()->user()->id)->first();
+        if (!empty($exstVote)) {
+            return redirect('/polls/' . $uuid . '/results');
+        }
+        
         // έλεγχος αν είναι ανώνυμη ψηφοφορία να κάνει redirect στα αποτελέσματα
         if ($poll->type == 'anonymous') {
             return redirect('/polls/' . $poll->uuid . '/results');
@@ -255,11 +261,11 @@ class PollsController extends Controller
         if($notExpired && $pollInPorgress) {
             return view('anonpoll', compact('token', 'poll', 'options')); //view που δείχνει την φόρμα για την ψηφοφορία
         } else if($pollCompleted) {
-            return $this->results($poll->uuid); //return results view
+            return $this->results($poll->uuid)->with('error', 'Η ψηφοφορία έχει λήξει'); //return results view
         } else {
             $poll->status = 'Completed';
             $poll->save();
-            return $this->results($poll->uuid);
+            return $this->results($poll->uuid)->with('error', 'Η ψηφοφορία έχει λήξει'); // δε δυολευει το with session
         }
     }
 }

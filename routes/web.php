@@ -20,8 +20,8 @@ Route::get('/polls/{uuid}', 'PollsController@show');            // Route psifofo
 Route::post('/polls/vote', 'VotesController@store');            // Post request gia thn apostolh pshfoy
 Route::get('/polls/{uuid}/results', 'PollsController@results'); // Route apotelesmatwn psifoforias
 
-Route::get('/polls/anon/{uuid}&{token}', 'PollsController@showAnon');
-Route::put('/polls/anon/vote', 'VotesController@anonStore');
+Route::get('/polls/anon/{uuid}&{token}', 'PollsController@showAnon'); // Route για την φόρμα ανώνυμης ψηφοφορίας
+Route::put('/polls/anon/vote', 'VotesController@anonStore');          // Put request για την ανώνυμη ψήφο
 
 Route::group(['middleware' => 'admin'], function () {
     Route::prefix('admin')->group(function () {                     // Κάνει prepend /admin στο route

@@ -310,10 +310,10 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi there,</p>
+                      <p>Μια νέα ψηφοφορία με τίτλο {{$poll->name}} έχει δημιουργηθεί. Ακολούθησε τον παρακάτω σύνδεσμό για να ψηφίσεις.</p>
                         <a href="{{url("/polls/anon/{$poll->uuid}&{$vote->token}")}}">{{url("/polls/anon/{$poll->uuid}&{$vote->token}")}}</a>
-                        <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                        {{-- <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p> --}}
+                        {{-- <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
                               <td align="left">
@@ -329,7 +329,7 @@
                           </tbody>
                         </table>
                         <p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                        <p>Good luck! Hope it works.</p>
+                        <p>Good luck! Hope it works.</p> --}}
                       </td>
                     </tr>
                   </table>
@@ -341,7 +341,7 @@
 
             <!-- START FOOTER -->
             <div class="footer">
-              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+              {{-- <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
@@ -353,7 +353,7 @@
                     Powered by <a href="http://htmlemail.io">HTMLemail</a>.
                   </td>
                 </tr>
-              </table>
+              </table> --}}
             </div>
             <!-- END FOOTER -->
 
