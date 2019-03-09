@@ -16,29 +16,12 @@ class VotesController extends Controller
         // Δημιουργία ψήφου
         $vote = new Vote();
         $vote->user_id = auth()->user()->id;
-        $vote->token = null;
+        $vote->token = '';
+        $vote->poll_id = $request->poll_id;
         $vote->vote = $request->input('vote');
         $vote->save();
-        // 
-        return redirect('/polls/' . $vote->poll_id . '/results')->with('success', 'Your Vote has been Submited!');
-
-        // if (empty($request->token)) {
-        //     $vote->user_id = auth()->user()->id;
-        //     $vote->token = null;
-        // } else {
-        //     $vote->token = $request->token;
-        //     $vote->user_id = null;
-        // }
         
-
-        // $vote->poll_id = $request->input('poll_id');
-        // if(empty(auth()->user()->id)){
-        //     $vote->user_id = 'guest';
-        // } else {
-        //     $vote->user_id = auth()->user()->id;
-        // }
-        // $vote->vote = $request->input('vote');
-        // $vote->save();
+        return redirect('/polls/' . $request->uuid . '/results')->with('success', 'Your Vote has been Submited!');
         
     }
 
