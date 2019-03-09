@@ -12,7 +12,7 @@ class VotesController extends Controller
         $request->validate([
             'vote' => 'required'
         ]);
-
+        
         // Δημιουργία ψήφου
         $vote = new Vote();
         $vote->user_id = auth()->user()->id;
@@ -20,9 +20,7 @@ class VotesController extends Controller
         $vote->poll_id = $request->poll_id;
         $vote->vote = $request->input('vote');
         $vote->save();
-        
         return redirect('/polls/' . $request->uuid . '/results')->with('success', 'Your Vote has been Submited!');
-        
     }
 
     public function anonStore(Request $request)

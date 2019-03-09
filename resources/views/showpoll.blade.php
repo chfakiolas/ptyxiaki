@@ -8,6 +8,7 @@
 	<hr>
 	{{Form::open(['action' => 'VotesController@store', 'method' => 'POST'])}}
 	{{Form::hidden('poll_id', $poll->id)}}
+	{{Form::hidden('uuid', $poll->uuid)}}
 	@foreach($options as $option)
 		{{Form::bsRadio($option->option, 'vote', $option->option, ['id' => $option->option])}}
 		<br>
