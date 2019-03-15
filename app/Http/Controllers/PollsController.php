@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Poll;
 use Illuminate\Http\Request;
 use App\PollOption; //Μπορει να μην το χρειαζομαι να δω τις σχέσεις.
@@ -100,9 +101,11 @@ class PollsController extends Controller
         $poll = Poll::where('uuid', $uuid)->first();  // Βρίσκω την ψηφοφορία
 
         // ελέγχω αν ο χρήστης έχει ψηφίσει τότε να ανακτευθύνεται στα αποτελέσματα της ψηφοφορίας
-        $exstVote = Vote::where('user_id', auth()->user()->id)->first();
-        if (!empty($exstVote)) {
-            return redirect('/polls/' . $uuid . '/results');
+        if(Auth::check()){
+            $exstVote = Vote::where('user_id', auth()->user()->id)->first();
+            if (!empty($exstVote)) {
+                return redirect('/polls/' . $uuid . '/results');
+            }
         }
         
         // έλεγχος αν είναι ανώνυμη ψηφοφορία να κάνει redirect στα αποτελέσματα
