@@ -32,15 +32,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/admin/users" class="nav-link {{ Request::is('admin/users') ? 'active' : '' }}">
-              <i class="nav-icon fa fa-group"></i>
-              <p>
-                Users
-                {{-- <span class="right badge badge-danger">New</span> --}}
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="/admin/polls" class="nav-link {{ Request::is('admin/polls') ? 'active' : '' }}">
               <i class="nav-icon  fa fa-pie-chart"></i>
               <p>

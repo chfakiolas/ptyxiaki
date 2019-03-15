@@ -26,7 +26,6 @@ Route::put('/polls/anon/vote', 'VotesController@anonStore');          // Put req
 Route::group(['middleware' => 'admin'], function () {
     Route::prefix('admin')->group(function () {                     // Κάνει prepend /admin στο route
         Route::get('/', 'AdminController@index');                   // Admin index page
-        Route::get('/users', 'AdminController@users');              // Admin users page
         Route::get('/polls', 'AdminController@polls');              // Admin polls page
         Route::get('/profile', 'AdminController@profile');          // Admin profile
         Route::get('/messages', 'MessagesController@adminMessages');// Admin get messages route
@@ -36,6 +35,7 @@ Route::group(['middleware' => 'admin'], function () {
         Route::get('/polls/edit/{id}', 'PollsController@edit');     // Edit view route
         Route::put('/polls/edit', 'PollsController@update');        // Edit put request
         Route::delete('/polls/{id}/delete', 'PollsController@destroy')->name('delete-poll'); //Delete request route
+        Route::get('/polls/{uuid}/details', 'AdminController@pollDetails');
     });
 
     Route::get('/logout', 'AdminController@logout');                  // Logout link admin 
