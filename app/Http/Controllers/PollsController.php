@@ -123,7 +123,7 @@ class PollsController extends Controller
             // return view('showpoll')->with('poll', $poll)->with('options', $options);  //view που δείχνει την ψηφοφορία
             return view('showpoll', compact('poll', 'options'));
         } else if($pollCompleted || !$notExpired || ($poll->type == 'anonymous' && $token == null)) {
-            return $this->results($poll->id); //return results view
+            return $this->results($poll->uuid); //return results view
         } else {
             // $poll->status = 'Completed';
             // $poll->save();
