@@ -48922,14 +48922,6 @@ $(document).ready(function () {
 		var id = $('#options').children().last().data("id");
 		id++;
 		// προσθετω το πεδιο πριν το div του κουμπιου
-		$('#options').append('\n\t\t\t<div data-id="' + id + '" class="form-group row">\n    \t\t\t<label for="option' + id + '" class="col-sm-2 col-form-label">Poll option ' + id + '</label>\n    \t\t\t<div class="col-sm-9">\n\t\t\t\t\t<input class="form-control" placeholder="Poll option ' + id + '" name="option[]" type="text" id="option' + id + '">\n\t\t\t\t</div>\n\t\t\t\t<div class="col-sm-1">\n                    <button id="remove-choice" class="btn btn-danger form-control"><i class="fa fa-close"></i></button>\n                </div>\n\t\t\t</div>');
-	});
-
-	$('#remove-choice').click(function () {
-		// βρίσκω το data id απο το τελευταίο div των #pollchoices
-		var id = $('#options').children().last().data("id");
-		id--;
-		// προσθετω το πεδιο πριν το div του κουμπιου
 		$('#options').append('\n\t\t\t<div data-id="' + id + '" class="form-group row">\n    \t\t\t<label for="option' + id + '" class="col-sm-2 col-form-label">Poll option ' + id + '</label>\n    \t\t\t<div class="col-sm-10">\n\t\t\t\t\t<input class="form-control" placeholder="Poll option ' + id + '" name="option[]" type="text" id="option' + id + '">\n\t\t\t\t</div>\n\t\t\t</div>');
 	});
 });

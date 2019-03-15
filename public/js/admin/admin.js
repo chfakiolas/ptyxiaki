@@ -78,6 +78,7 @@ module.exports = __webpack_require__(48);
 
 
 __webpack_require__(49);
+
 $(document).ready(function () {
     $('.delete-poll').click(function (e) {
         e.preventDefault(); // Don't post the form, unless confirmed
