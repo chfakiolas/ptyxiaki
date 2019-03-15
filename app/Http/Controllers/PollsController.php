@@ -220,11 +220,10 @@ class PollsController extends Controller
         $poll = Poll::find($id);
         $votes = Poll::find($id)->vote;
         $voteExist = $votes->first();
-        // return $voteExist;
         if($voteExist) {
             $poll->status = 'Completed';
             $poll->save();
-            return redirect('/admin/polls')->with('success', 'Η ψηφοφορια έχει ολοκληρωθεί.');
+            return redirect('/admin/polls')->with('error', 'Η ψηφοφορια έχει ψήφους και δε μπορεί να διαγραφεί');
         } else {
             $options = $poll->pollOption; // Βρίσκω τις επιλογές της ψηφοφορίας
             foreach($options as $o) {
