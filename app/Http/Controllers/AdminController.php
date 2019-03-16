@@ -4,31 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\User;
 use App\Poll;
+use App\Vote;
 
 class AdminController extends Controller
 {
     public function index(){
     	return view('admin.index');
     }
-    
-    public function users(){
-        $users = User::paginate(10);
-    	return view('admin.users')->with('users', $users);
-    }
 
-    public function polls(){
+    public function polls()
+    {
         $polls = Poll::orderBy('id', 'desc')->paginate(10);
     	return view('admin.polls')->with('polls', $polls);
     }
 
-    public function messages(){
-    	return view('admin.messages');
+    public function pollDetails($uuid)
+    {
+        $poll = Poll::where('uuid', $uuid)->first();
+        $options = Poll::find($poll->id)->pollOption;
+        $votes = Vote::where('poll_id', $poll->id)->where('vote', '!=', null)->get();
+        return view('admin.polldetails', compact('poll', 'options', 'votes'));
     }
 
-    public function profile(){
-        return view('admin.profile');
+    public function messages(){
+    	return view('admin.messages');
     }
 
     public function logout () { // Logout method

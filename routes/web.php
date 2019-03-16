@@ -27,7 +27,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::prefix('admin')->group(function () {                     // Κάνει prepend /admin στο route
         Route::get('/', 'AdminController@index');                   // Admin index page
         Route::get('/polls', 'AdminController@polls');              // Admin polls page
-        Route::get('/profile', 'AdminController@profile');          // Admin profile
         Route::get('/messages', 'MessagesController@adminMessages');// Admin get messages route
         Route::get('/createpoll', 'PollsController@create');        // Create poll page
         Route::post('/createpoll', 'PollsController@store');        // Create poll POST request

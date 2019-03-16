@@ -16,15 +16,7 @@
           <i class="fa fa-sort-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="/admin/profile" class="dropdown-item">
-            <div class="media">
-              <div class="media-body">
-                Profile
-                </h3>
-              </div>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
+          {{-- <div class="dropdown-divider"></div> --}}
           <a href="{{ route('logout') }}" class="dropdown-item">
             <div class="media">
               <div class="media-body">
