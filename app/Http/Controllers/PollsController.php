@@ -102,10 +102,17 @@ class PollsController extends Controller
 
         // ελέγχω αν ο χρήστης έχει ψηφίσει τότε να ανακτευθύνεται στα αποτελέσματα της ψηφοφορίας
         if(Auth::check()){
-            $exstVote = Vote::where('user_id', auth()->user()->id)->first();
-            if (!empty($exstVote)) {
+            // κοιτάω αν υπάρχει ψήφος με το user id του για την συγκεκριμένη ψηφοφορία
+            $exstVote = Vote::where([
+                ['user_id', '=', auth()->user()->id],
+                ['poll_id', '=', $poll->id]
+            ])->first();
+
+            if (!is_null($exstVote)) {
                 return redirect('/polls/' . $uuid . '/results');
             }
+        } else { //Αν δεν έχει συνδεθεί ανακατευθύνεται στα αποτελέσματα
+            return redirect('/polls/' . $uuid . '/results');
         }
         
         // έλεγχος αν είναι ανώνυμη ψηφοφορία να κάνει redirect στα αποτελέσματα
@@ -147,6 +154,11 @@ class PollsController extends Controller
      */
     public function edit($id)
     {
+        // $existVote = Vote::where('poll_id', '=', $poll->id)->first();
+        // if(!is_null($existVote)){
+        //     return re
+        // }
+
         $poll = Poll::find($id);
         $options = Poll::find($id)->pollOption;
         $expiration = $poll->date . ' ' . $poll->time;
@@ -156,11 +168,11 @@ class PollsController extends Controller
         if($notExpired && $pollInPorgress){
             return view('admin.editpoll')->with('poll', $poll)->with('options', $options);
         } else if($pollCompleted) {
-            return redirect('/admin')->with('error', 'Η ψηφοφορια έχει λήξει και δε μπορεί να επεξεργαστεί.'); //redirect sto dashboard
+            return redirect('/admin/polls')->with('error', 'Η ψηφοφορια έχει λήξει και δε μπορεί να επεξεργαστεί.'); //redirect sto dashboard
         } else {
             $poll->status = 'Completed';
             $poll->save();
-            return redirect('/admin')->with('error', 'Η ψηφοφορια έχει λήξει και δε μπορεί να επεξεργαστεί.'); //redirect sto dashboard
+            return redirect('/admin/polls')->with('error', 'Η ψηφοφορια έχει λήξει και δε μπορεί να επεξεργαστεί.'); //redirect sto dashboard
         }
         
     }

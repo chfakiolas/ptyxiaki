@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     // Eloquent relationship one to many
     public function vote(){
-        return $this->hasMany('App\Vote');
+        return $this->hasOne('App\Vote');
     }
 
     public function isAdmin(){

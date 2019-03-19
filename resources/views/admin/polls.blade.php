@@ -32,7 +32,7 @@ Polls
 								</div>
 								&nbsp;
 								<div>
-									<a class="btn btn-success" href="#"><i class="fa fa-eye" aria-hidden="true"></i> Προβολή</a>
+								<a class="btn btn-success" href="/admin/polls/{{$poll->uuid}}/details"><i class="fa fa-eye" aria-hidden="true"></i> Προβολή</a>
 								</div>
 						</td>
 					</tr>
