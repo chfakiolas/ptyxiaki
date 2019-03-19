@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 @section('title')
-Polls
+Ψηφοφορίες
 @endsection
 @section('content')
 	<div class="row">
@@ -19,7 +19,7 @@ Polls
 					<tr id="{{$poll->id}}">
 						<td>{{$poll->id}}</td>
 						<td class="text-center">{{$poll->name}}</td>
-						<td class="text-center"><b>{{$poll->status}}</b></td>
+						<td class="text-center"><b>@if($poll->status == 'Completed') {{'Ολοκληρωμένη'}} @else {{'Ενεργή'}} @endif</b></td>
 						<td class="btn-group">
 								<div>
 									<a class="btn btn-info" href="/admin/polls/edit/{{$poll->id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Επεξεργασία</a>

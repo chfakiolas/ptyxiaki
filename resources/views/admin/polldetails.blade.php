@@ -61,6 +61,8 @@
   <div class="card-body">
     <h5 class="card-title">{{$poll->name}}</h5>
     <hr>
+    <h4>Κατάσταση: @if($poll->status == 'Completed') {{'Ολοκληρωμένη'}} @else {{'Ενεργή'}} @endif</h4>
+    <hr>
     <h4>Τύπος: @php if($poll->type === 'anonymous'){echo 'Ανώνυμη';} else {echo 'Επώνυμη';}@endphp</h4>
     <hr>
     <h4>Συνολικοί ψήφοι: {{count($votes)}}</h4>
