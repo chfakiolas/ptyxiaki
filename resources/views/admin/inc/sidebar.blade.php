@@ -19,13 +19,12 @@
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
-                {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="/admin/createpoll" class="nav-link {{ Request::is('admin/createpoll') ? 'active' : '' }}">
-              <i class="fa fa-pie-chart" aria-hidden="true"></i>
+              <i class="nav-icon fa fa-pie-chart" aria-hidden="true"></i>
               <p>
                 Νέα Ψηφοφορία
               </p>
@@ -35,8 +34,7 @@
             <a href="/admin/polls" class="nav-link {{ Request::is('admin/polls') ? 'active' : '' }}">
               <i class="nav-icon  fa fa-pie-chart"></i>
               <p>
-                Polls
-                {{-- <span class="right badge badge-danger">New</span> --}}
+                  Ψηφοφορίες
               </p>
             </a>
           </li>
@@ -45,7 +43,6 @@
               <i class="nav-icon fa fa-envelope"></i>
               <p>
                 Messages
-                {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>
           </li>
