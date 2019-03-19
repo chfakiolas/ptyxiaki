@@ -6,23 +6,7 @@
 </div>
 <div class="row">
 	<div class="col-md-6 offset-md-3">
-	{!! Form::open(['action' => 'MessagesController@store']) !!}
-		<div class="form-group">
-			{{Form::label('name', 'Name')}}
-			{{Form::text('name', '', ['class' => 'form-control', 'Placeholder' => 'Your Name'])}}
-		</div>
-		<div class="form-group">
-			{{Form::label('email', 'E-mail')}}
-			{{Form::text('email', '', ['class' => 'form-control', 'Placeholder' => 'Your E-mail'])}}
-		</div>
-		<div class="form-group">
-			{{Form::label('message', 'Message')}}
-			{{Form::textarea('message', '', ['class' => 'form-control', 'Placeholder' => 'Your Message'])}}
-		</div>
-		<div>
-			{{Form::submit('Submit', ['class' => 'btn btn-success'])}}
-		</div>
-	{!!Form::close()!!}
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet tincidunt libero. Praesent vitae lacus vel neque iaculis efficitur. Nulla mi lacus, hendrerit sit amet lobortis eu, ullamcorper sit amet orci. Pellentesque eget ligula nisl. Donec ut sem sed dui dictum auctor. Praesent sodales leo eu lectus fermentum, sit amet auctor purus vehicula. Aliquam ut odio dui. Nunc leo eros, volutpat id dictum non, scelerisque nec ipsum. Ut pulvinar porta quam id dictum. Aliquam non diam metus. Ut cursus augue accumsan, condimentum dolor at, dignissim ex. Nulla a ultrices libero.</p>
 	</div>
 </div>
 @endsection

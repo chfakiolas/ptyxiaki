@@ -34,11 +34,6 @@ class AdminController extends Controller
        
     }
 
-    public function messages()
-    {
-    	return view('admin.messages');
-    }
-
     public function logout () 
     { // Logout method
         //logout user

@@ -38,14 +38,6 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="/admin/messages" class="nav-link {{ Request::is('admin/messages') ? 'active' : '' }}">
-              <i class="nav-icon fa fa-envelope"></i>
-              <p>
-                Messages
-              </p>
-            </a>
-          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
