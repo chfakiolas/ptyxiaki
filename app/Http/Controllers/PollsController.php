@@ -160,6 +160,11 @@ class PollsController extends Controller
         // }
 
         $poll = Poll::find($id);
+        $votes = Poll::find($id)->vote;
+        $voteExist = $votes->where('vote', '<>', null)->first();
+        if($voteExist) {
+            return redirect('/admin/polls')->with('error', 'Η ψηφοφορία έχει ψήφους και δε μπορεί να επεξεργαστεί');
+        }
         $options = Poll::find($id)->pollOption;
         $expiration = $poll->date . ' ' . $poll->time;
         $notExpired = strtotime($expiration) > time(); // Συγκρίνω την ημερομηνία και ώρα της ψηφοφορίας με την τωρινή
@@ -231,7 +236,7 @@ class PollsController extends Controller
     {
         $poll = Poll::find($id);
         $votes = Poll::find($id)->vote;
-        $voteExist = $votes->first();
+        $voteExist = $votes->where('vote', '<>', null)->first();
         if($voteExist) {
             $poll->status = 'Completed';
             $poll->save();
