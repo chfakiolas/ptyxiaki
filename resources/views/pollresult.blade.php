@@ -53,8 +53,23 @@
       <div class="card-body">
         <h5 class="card-title">{{$poll->name}}</h5>
         <hr>
-        <h4>Total Votes: {{count($votes)}}</h4>
-        <p></p>
+        <h4>Συνολικοί ψήφοι: {{count($votes)}}</h4>
+        @foreach($options as $option)
+        @php
+        $totalVotes=0;
+        @endphp
+        @foreach($votes as $vote)
+          @if($vote->vote === $option->option)
+            @php
+              $totalVotes++;
+            @endphp
+          @endif
+        @endforeach
+        <h5>{{$option->option}}: {{$totalVotes}}</h4>
+        @endforeach
+        <h4></h4>
+        <hr>
+        <h4>Περιγραφή</h4>
         <p class="card-text">{{$poll->description}}</p>
       </div>
     </div>
