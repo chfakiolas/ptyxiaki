@@ -11,7 +11,9 @@ class AdminController extends Controller
 {
     public function index()
     {
-    	return view('admin.index');
+        $polls = Poll::all();
+        $activePolls = Poll::where('status', 'In progress')->get();
+    	return view('admin.index', compact('polls', 'activePolls'));
     }
 
     public function polls()

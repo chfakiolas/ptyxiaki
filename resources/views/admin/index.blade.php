@@ -3,17 +3,16 @@
 Dashboard
 @endsection
 @section('content')
-	<p class="text-center">Dashboard content starts here</p>
 	<div class="row">
 		<div class="col-md-3">
 			<div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{count($polls)}}</h3>
                 
-                <p>User Registrations</p>
+                <p><b>Συνολικές Ψηφοφορίες</b></p>
               </div>
               <div class="icon">
-                <i class="fa fa-user-plus"></i>
+                <i class="fa fa-pie-chart"></i>
               </div>
             </div>
 		</div>
@@ -21,9 +20,9 @@ Dashboard
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>5</h3>
+          <h3>{{count($activePolls)}}</h3>
 
-          <p>Total Polls</p>
+          <p>Ενεργές Ψηφοφορίες</p>
         </div>
         <div class="icon">
           <i class="fa fa-users"></i>
