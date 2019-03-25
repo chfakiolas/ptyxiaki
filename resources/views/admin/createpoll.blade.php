@@ -62,4 +62,5 @@
         </div>
     {!! Form::close() !!}
 </div>
+<br>
 @endsection
