@@ -40,7 +40,6 @@ class AdminController extends Controller
     { // Logout method
         //logout user
         auth()->logout();
-        // redirect to homepage
-        return redirect('/');
+        return redirect('/'); // redirect to homepage
     }
 }

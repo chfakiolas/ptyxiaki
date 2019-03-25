@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 @section('title')
-Create Poll
+Δημιουργία Ψηφοφορίας
 @endsection
 @section('content')
 <div class="col-md-8 offset-md-2">

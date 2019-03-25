@@ -20,7 +20,7 @@ Route::post('/polls/vote', 'VotesController@store');            // Post request 
 Route::get('/polls/{uuid}/results', 'PollsController@results'); // Route apotelesmatwn psifoforias
 Route::get('/polls/anon/{uuid}&{token}', 'PollsController@showAnon'); // Route για την φόρμα ανώνυμης ψηφοφορίας
 Route::put('/polls/anon/vote', 'VotesController@anonStore');          // Put request για την ανώνυμη ψήφο
-
+Route::get('/logout', 'AdminController@logout');                  // Logout link
 Route::group(['middleware' => 'admin'], function () {
     Route::prefix('admin')->group(function () {                     // Κάνει prepend /admin στο route
         Route::get('/', 'AdminController@index');                   // Admin index page
@@ -31,7 +31,6 @@ Route::group(['middleware' => 'admin'], function () {
         Route::get('/polls/edit/{id}', 'PollsController@edit');     // Edit view route
         Route::put('/polls/edit', 'PollsController@update');        // Edit put request
         Route::delete('/polls/{id}/delete', 'PollsController@destroy')->name('delete-poll'); //Delete request route
-        Route::get('/polls/{uuid}/details', 'AdminController@pollDetails');
+        Route::get('/polls/{uuid}/details', 'AdminController@pollDetails'); // Προβολή λεπτομερειών route
     });
-    Route::get('/logout', 'AdminController@logout');                  // Logout link admin 
 });
