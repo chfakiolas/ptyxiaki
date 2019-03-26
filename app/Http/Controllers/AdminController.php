@@ -18,6 +18,16 @@ class AdminController extends Controller
 
     public function polls()
     {
+        // Έλεγχος για ψηφοφορίες που έχουν λήξει
+        $exPolls = Poll::all();
+        foreach ($exPolls as $e) {
+            $expiration = $e->date . ' ' . $e->time;
+            $expired = strtotime($expiration) < time();
+            if($e->status === 'In progress' && $expired){
+                $e->status = 'Completed';
+                $e->save();
+            }
+        }
         $polls = Poll::orderBy('id', 'desc')->paginate(10);
     	return view('admin.polls')->with('polls', $polls);
     }
