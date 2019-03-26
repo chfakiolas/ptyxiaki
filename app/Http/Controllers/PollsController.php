@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\PollOption; //Μπορει να μην το χρειαζομαι να δω τις σχέσεις.
 use App\User;
 use Webpatser\Uuid\Uuid; // UUID class generator
-use App\Mail\VoteMail; // Mail class για αποστολή των mails
+use App\Mail\VoteMail; // Mail class για αποστολή των ανωνυμων mail
+use App\Mail\EponMail; // Mail class για αποστολη των επωνυμων mail
 use App\Vote;
 
 class PollsController extends Controller
@@ -76,6 +77,11 @@ class PollsController extends Controller
                 $vote->token = Uuid::generate();
                 $vote->save();
                 \Mail::to($user)->queue(new VoteMail($poll, $vote));
+            }
+        } else {
+            $users = User::all();
+            foreach ($users as $user) {
+                \Mail::to($user)->queue(new EponMail($poll));
             }
         }
 

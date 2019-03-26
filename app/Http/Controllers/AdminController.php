@@ -13,7 +13,7 @@ class AdminController extends Controller
     {
         $polls = Poll::all();
         // Έλεγχος για ψηφοφορίες που έχουν λήξει
-        Poll::expPolls($exPolls);
+        Poll::expPolls($polls);
         $activePolls = Poll::where('status', 'In progress')->get();
     	return view('admin.index', compact('polls', 'activePolls'));
     }
