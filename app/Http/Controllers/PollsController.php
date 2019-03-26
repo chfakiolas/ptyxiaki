@@ -124,24 +124,13 @@ class PollsController extends Controller
         $expiration = $poll->date . ' ' . $poll->time;
         $notExpired = strtotime($expiration) > time();
         $pollInPorgress = $poll->status == 'In progress';
-        $pollCompleted = $poll->status == 'Completed';
 
         if($notExpired && $pollInPorgress) {
-            // return view('showpoll')->with('poll', $poll)->with('options', $options);  //view που δείχνει την ψηφοφορία
-            return view('showpoll', compact('poll', 'options'));
-        } else if($pollCompleted || !$notExpired || ($poll->type == 'anonymous' && $token == null)) {
-            return $this->results($poll->uuid); //return results view
+            return view('showpoll', compact('poll', 'options')); //view που δείχνει την ψηφοφορία
         } else {
-            // $poll->status = 'Completed';
-            // $poll->save();
-            
-            // $data['poll'] = $poll;
-            // $data['options'] = $options;
-            // $data['token'] = $token;
-            return view('showpoll', compact('data', 'poll', 'options'));
-
-            // compact('persons', 'ms')
-            // return view('showpoll')->with('poll', $poll)->with('options', $options)->with('token', $token);  //view που δείχνει την ψηφοφορία
+            $poll->status = 'Completed';
+            $poll->save();
+            return $this->results($poll->uuid);
         }
     }
     
@@ -154,13 +143,8 @@ class PollsController extends Controller
      */
     public function edit($id)
     {
-        // $existVote = Vote::where('poll_id', '=', $poll->id)->first();
-        // if(!is_null($existVote)){
-        //     return re
-        // }
-
-        $poll = Poll::find($id);
-        $votes = Poll::find($id)->vote;
+        $poll = Poll::find($id); //Βρίσκω την ψηφοφορία
+        $votes = Poll::find($id)->vote; // Βρίσκω τις ψήφους της ψηφοφορίας
         $voteExist = $votes->where('vote', '<>', null)->first();
         if($voteExist) {
             return redirect('/admin/polls')->with('error', 'Η ψηφοφορία έχει ψήφους και δε μπορεί να επεξεργαστεί');

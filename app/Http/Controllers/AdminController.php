@@ -12,6 +12,8 @@ class AdminController extends Controller
     public function index()
     {
         $polls = Poll::all();
+        // Έλεγχος για ψηφοφορίες που έχουν λήξει
+        Poll::expPolls($exPolls);
         $activePolls = Poll::where('status', 'In progress')->get();
     	return view('admin.index', compact('polls', 'activePolls'));
     }
@@ -20,14 +22,7 @@ class AdminController extends Controller
     {
         // Έλεγχος για ψηφοφορίες που έχουν λήξει
         $exPolls = Poll::all();
-        foreach ($exPolls as $e) {
-            $expiration = $e->date . ' ' . $e->time;
-            $expired = strtotime($expiration) < time();
-            if($e->status === 'In progress' && $expired){
-                $e->status = 'Completed';
-                $e->save();
-            }
-        }
+        Poll::expPolls($exPolls);
         $polls = Poll::orderBy('id', 'desc')->paginate(10);
     	return view('admin.polls')->with('polls', $polls);
     }

@@ -20,4 +20,18 @@ class Poll extends Model
     public function vote(){
     	return $this->hasMany('App\Vote');
     }
+
+    public static function expPolls($polls)
+    {
+        foreach ($polls as $poll) {
+
+            $expiration = $poll->date . ' ' . $poll->time;
+            $expired = strtotime($expiration) < time();
+
+            if($poll->status === 'In progress' && $expired){
+                $poll->status = 'Completed';
+                $poll->save();
+            }
+        }
+    }
 }
