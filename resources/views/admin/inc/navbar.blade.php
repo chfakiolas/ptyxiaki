@@ -12,7 +12,7 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          {{Auth::user()->name}}
+          {{Auth::user()->username}}
           <i class="fa fa-sort-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
