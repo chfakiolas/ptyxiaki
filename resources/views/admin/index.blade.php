@@ -25,7 +25,7 @@ Dashboard
           <p>Ενεργές Ψηφοφορίες</p>
         </div>
         <div class="icon">
-          <i class="fa fa-users"></i>
+          <i class="fa fa-pie-chart"></i>
         </div>
       </div>
     </div>
