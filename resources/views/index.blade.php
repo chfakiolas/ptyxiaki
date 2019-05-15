@@ -18,7 +18,7 @@
 	</div>
 	</div>
 @else
-<p class="text-center">No poll yet :(</p>
+<p class="text-center"></p>
 @endif
 <br>
 @endsection

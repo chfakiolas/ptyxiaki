@@ -48922,7 +48922,7 @@ $(document).ready(function () {
 		var id = $('#options').children().last().data("id");
 		id++;
 		// προσθετω το πεδιο πριν το div του κουμπιου
-		$('#options').append('\n\t\t\t<div data-id="' + id + '" class="form-group row">\n    \t\t\t<label for="option' + id + '" class="col-sm-2 col-form-label">Poll option ' + id + '</label>\n    \t\t\t<div class="col-sm-10">\n\t\t\t\t\t<input class="form-control" placeholder="Poll option ' + id + '" name="option[]" type="text" id="option' + id + '">\n\t\t\t\t</div>\n\t\t\t</div>');
+		$('#options').append('\n\t\t\t<div data-id="' + id + '" class="form-group row">\n    \t\t\t<label for="option' + id + '" class="col-sm-2 col-form-label">\u03A8\u03AE\u03C6\u03BF\u03C2 ' + id + '</label>\n    \t\t\t<div class="col-sm-10">\n\t\t\t\t\t<input class="form-control" placeholder="Poll option ' + id + '" name="option[]" type="text" id="option' + id + '">\n\t\t\t\t</div>\n\t\t\t</div>');
 	});
 });
 
