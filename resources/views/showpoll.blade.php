@@ -3,7 +3,7 @@
 	
 	<div class="row">
 		<div class="col-md-8 offset-md-2">
-			<a href="/" class="btn btn-primary float-left">Back</a><a href="/polls/{{$poll->uuid}}/results" class="btn btn-primary float-right">Results</a>
+			<a href="/" class="btn btn-primary float-left">Επιστροφή</a><a href="/polls/{{$poll->uuid}}/results" class="btn btn-primary float-right">Αποτελέσματα</a>
 			<br><br>
 			<h2 class="text-center">{{$poll->name}}</h2>
 			<br>

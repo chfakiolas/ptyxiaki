@@ -40,7 +40,7 @@
 				</tbody>
 			</table>
 			@if(count($polls) == 0)
-				<h3 class="text-center">{{'There are no polls to display.'}}</h3>
+				<h3 class="text-center">{{'Δεν υπάρχουν ψηφοφορίες.'}}</h3>
 			@endif
 			<div class="d-flex justify-content-center">
 			{{$polls->links()}}

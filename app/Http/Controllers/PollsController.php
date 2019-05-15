@@ -226,6 +226,7 @@ class PollsController extends Controller
     {
         $poll = Poll::find($id);
         $votes = Poll::find($id)->vote;
+        // return $votes;
         $voteExist = $votes->where('vote', '<>', null)->first();
         if($voteExist) {
             $poll->status = 'Completed';
@@ -235,6 +236,12 @@ class PollsController extends Controller
             $options = $poll->pollOption; // Βρίσκω τις επιλογές της ψηφοφορίας
             foreach($options as $o) {
                 $o->delete();
+            } 
+            if($poll->type == 'anonymous'){
+                $votes = Poll::find($poll->id)->vote;
+                foreach ($votes as $vote) {
+                    $vote->delete();
+                }
             }
             $poll->delete();
             return redirect('/admin/polls')->with('success', 'Η ψηφοφορια έχει διαγραφεί.');

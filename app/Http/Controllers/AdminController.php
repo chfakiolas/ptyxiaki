@@ -41,10 +41,9 @@ class AdminController extends Controller
        
     }
 
-    public function logout () 
-    { // Logout method
-        //logout user
-        auth()->logout();
+    public function logout () // Logout method
+    { 
+        auth()->logout();//logout user
         return redirect('/'); // redirect to homepage
     }
 }
